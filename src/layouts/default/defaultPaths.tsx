@@ -3,7 +3,7 @@ import { FlagCircle } from '@mui/icons-material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 export const navigationList = [
   {
@@ -25,6 +25,18 @@ export const navigationList = [
         segment: 'new',
         title: 'Create',
         icon: <AddCircleOutlineIcon />,
+      },
+    ],
+  },
+  {
+    segment: 'city',
+    title: 'City',
+    icon: <LocationCityIcon />,
+    children: [
+      {
+        segment: 'list',
+        title: 'List',
+        icon: <FormatListBulletedIcon />,
       },
     ],
   },

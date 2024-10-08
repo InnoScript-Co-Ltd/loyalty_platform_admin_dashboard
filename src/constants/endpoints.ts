@@ -6,6 +6,7 @@ export const baseURL = env[0];
 export const endpoints = {
     login: "auth/login",
     country: "Country",
+    city: "City",
     image: `${baseURL}/storage/images`,
     status: "status",
 }

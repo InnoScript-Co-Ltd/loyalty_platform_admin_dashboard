@@ -3,6 +3,7 @@ import DefaultLayout from "./layouts/default";
 import { NotFound } from "./layouts/default/pages/NotFound";
 import BlankTemplate from "./layouts/default/pages/BlankTemplate";
 import { CountryRoute } from "./modules/country/country.route";
+import { CityRoute } from "./modules/city/city.route";
 
 
 export const routers = createBrowserRouter([
@@ -12,6 +13,7 @@ export const routers = createBrowserRouter([
         errorElement: <NotFound />,
         children: [
             ...CountryRoute,
+            ...CityRoute,
         ]
     },
     {
