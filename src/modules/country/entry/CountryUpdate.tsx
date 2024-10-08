@@ -1,4 +1,15 @@
-import { Box, Button, Card, Grid2, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  FilledInput,
+  FormControl,
+  FormHelperText,
+  Grid2,
+  Input,
+  InputLabel,
+  TextField,
+} from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { countryPayload } from "../country.payload";
 import { useNavigate, useParams } from "react-router";
@@ -48,15 +59,14 @@ const CountryUpdate = () => {
 
   return (
     <Box>
-
-    <Breadcrumb />
+      <Breadcrumb />
 
       <Card sx={{ marginTop: "20px", padding: "20px" }}>
         <h2>Country Update</h2>
 
         <Grid2 container spacing={2}>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            <TextField
+            {/* <TextField
               id="outlined-basic"
               label="Country Name"
               fullWidth
@@ -76,10 +86,32 @@ const CountryUpdate = () => {
                   }
                 )
               }
-            />
+            /> */}
+            <FormControl variant="filled" fullWidth>
+              <InputLabel htmlFor="country_name">Country Name</InputLabel>
+              <FilledInput
+                id="country_name"
+                aria-describedby="country_name_text"
+                disabled={loading}
+                value={payload ? payload.name : ""}
+                onChange={(e) =>
+                  payloadHandler(
+                    payload,
+                    e.target.value,
+                    "name",
+                    (updateValue) => {
+                      setPayload(updateValue);
+                    }
+                  )
+                }
+              />
+              <FormHelperText id="country_name_text">
+                Enter region name
+              </FormHelperText>
+            </FormControl>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            <TextField
+            {/* <TextField
               id="outlined-basic"
               label="Mobile Prefix Number"
               title="Mobile Prefix"
@@ -101,10 +133,36 @@ const CountryUpdate = () => {
                   }
                 )
               }
-            />
+            /> */}
+            <FormControl variant="filled" fullWidth>
+              <InputLabel htmlFor="mobile_prefix" variant="filled">
+                Mobile Prefix Number
+              </InputLabel>
+              <FilledInput
+                id="mobile_prefix"
+                aria-describedby="mobile_prefix_text"
+                disabled={loading}
+                value={
+                  payload.mobilePrefixNumber ? payload.mobilePrefixNumber : ""
+                }
+                onChange={(e) =>
+                  payloadHandler(
+                    payload,
+                    e.target.value,
+                    "mobilePrefixNumber",
+                    (updateValue) => {
+                      setPayload(updateValue);
+                    }
+                  )
+                }
+              />
+              <FormHelperText id="mobile_prefix_text">
+                Enter Mobile Prefix Number
+              </FormHelperText>
+            </FormControl>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            <TextField
+            {/* <TextField
               id="outlined-basic"
               label="FlagIcon"
               fullWidth
@@ -124,7 +182,29 @@ const CountryUpdate = () => {
                   }
                 )
               }
-            />
+            /> */}
+            <FormControl variant="filled" fullWidth>
+              <InputLabel htmlFor="flag_icon">Flag Icon</InputLabel>
+              <FilledInput
+                id="flag_icon"
+                aria-describedby="flag_icon_text"
+                disabled={loading}
+                value={payload.flagIcon ? payload.flagIcon : ""}
+                onChange={(e) =>
+                  payloadHandler(
+                    payload,
+                    e.target.value,
+                    "flagIcon",
+                    (updateValue) => {
+                      setPayload(updateValue);
+                    }
+                  )
+                }
+              />
+              <FormHelperText id="flag_icon_text">
+                Enter Flag Icon
+              </FormHelperText>
+            </FormControl>
           </Grid2>
         </Grid2>
 
