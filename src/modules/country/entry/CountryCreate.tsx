@@ -7,6 +7,7 @@ import { AppDispatch, AppRootState } from "../../../stores";
 import { COUNTRY_STORE, countryService } from "../country.service";
 import { payloadHandler } from "../../../helpers/handler";
 import { Breadcrumb } from "../../../components/Breadcrumb";
+import ValidationMessage from "../../../components/ValidationMessage";
 
 const CountryCreate = () => {
   const [loading, setLoading] = useState(false);
@@ -22,11 +23,11 @@ const CountryCreate = () => {
     setLoading(true);
     // const form : COUNTRY_STORE = formBuilder(payload, countryPayload.create);
     console.log(payload);
-    // const response = await countryService.store(payload, dispatch);
+    const response = await countryService.store(payload, dispatch);
     // if (response.data) {
     //   navigate(`${paths.country}/${response.data.id}`);
     // }
-    // setLoading(false);
+    setLoading(false);
   };
 
   return (

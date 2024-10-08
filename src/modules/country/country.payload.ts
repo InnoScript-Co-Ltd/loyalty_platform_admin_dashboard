@@ -3,11 +3,13 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { paginateOptions } from "../../constants/config";
 
-interface Column {
-  id: "id" | "name" | "mobilePrefixNumber" | "flagIcon";
+export interface Country_Column {
+  id: "id" | "name" | "mobilePrefixNumber" | "flagIcon" | "action";
   label: string;
   minWidth?: number;
   align?: "right";
+  numeric: boolean,
+  disablePadding: boolean,
   format?: (value: number) => string;
 }
 
@@ -22,20 +24,20 @@ export interface COUNTRY_PAYLOAD {
     flagIcon: string,
     mobilePrefixNumber: string
   },
-  paginateParams: {
-    page: number,
-    per_page: number,
-    columns: string,
-    search: string,
-    order: string,
-    sort: string
+  pagingParams: {
+    PageSize: number,
+    CurrentPage: number,
+    SortField: any,
+    SortDir: any,
+    SearchTerm: string
   }
 }
 
-export const columns: readonly Column[] = [
-  { id: "name", label: "Name", minWidth: 170 },
-  { id: 'mobilePrefixNumber', label: "Mobile Prefix", minWidth: 200 },
-  { id: 'flagIcon', label: 'FlagIcon', minWidth: 200 }
+export const columns: readonly Country_Column[] = [
+  { id: "name", label: "Name", minWidth: 170, numeric: false, disablePadding: false, },
+  { id: 'mobilePrefixNumber', label: "Mobile Prefix", minWidth: 200, numeric: false, disablePadding: false, },
+  { id: 'flagIcon', label: 'FlagIcon', minWidth: 200, numeric: false, disablePadding: false, },
+  { id: 'action', label: 'Action', minWidth: 20, numeric: false, disablePadding: false, }
 ];
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -69,12 +71,11 @@ export const countryPayload: COUNTRY_PAYLOAD = {
     flagIcon: "",
     mobilePrefixNumber: "",
   },
-  paginateParams: {
-    page: 1,
-    per_page: paginateOptions.rows,
-    columns: "id,name,country_code,mobile_prefix,status",
-    search: "",
-    order: "id",
-    sort: "DESC"
+  pagingParams: {
+    PageSize: paginateOptions.rows,
+    CurrentPage: 1,
+    SortField: "name",
+    SortDir: 0,
+    SearchTerm: ""
   }
 };

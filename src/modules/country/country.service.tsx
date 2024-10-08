@@ -26,14 +26,18 @@ export const countryService = {
         return response;
     },
 
-    index: async (dispatch: Dispatch, params: any) => {
+    index: async (dispatch: Dispatch, params: any, fn : any) => {
         const response: any = await getRequest(endpoints.country, params);
         await httpServiceHandler(dispatch, response);
-
-        if(response.status === 200) {
-            console.log(response);
-            
-            dispatch(index(response.data.data ? response.data.data : response.data));
+        if(response.status === 200) { 
+            fn('Success', { variant: "success" })
+                     
+            // dispatch(updateNotification({
+            //     msg: "Success",
+            //     variant: "success",
+            //     show: true
+            // }));
+            dispatch(index(response.data ? response.data : response.data));
         }
         return response;
     },

@@ -46,8 +46,6 @@ const CountryUpdate = () => {
     }
   }, [country]);
 
-  console.log(Object.keys(payload));
-
   return (
     <Box>
 
@@ -67,7 +65,6 @@ const CountryUpdate = () => {
               variant="filled"
               placeholder="Enter country name"
               disabled={loading}
-              defaultValue={payload.name}
               value={payload ? payload.name : ""}
               onChange={(e) =>
                 payloadHandler(
@@ -91,9 +88,6 @@ const CountryUpdate = () => {
               placeholder="Enter mobile prefix"
               fullWidth
               disabled={loading}
-              defaultValue={
-                payload.mobilePrefixNumber ? payload.mobilePrefixNumber : ""
-              }
               value={
                 payload.mobilePrefixNumber ? payload.mobilePrefixNumber : ""
               }
@@ -119,7 +113,6 @@ const CountryUpdate = () => {
               variant="filled"
               placeholder="Enter flag icon"
               disabled={loading}
-              defaultValue={payload.flagIcon ? payload.flagIcon : ""}
               value={payload.flagIcon ? payload.flagIcon : ""}
               onChange={(e) =>
                 payloadHandler(

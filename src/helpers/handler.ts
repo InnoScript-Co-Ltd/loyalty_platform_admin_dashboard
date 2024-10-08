@@ -28,9 +28,8 @@ export const httpErrorHandler = (error: any) => {
       status: 0,
       notification: {
         show: true,
-        summary: "Network Error!",
+        msg: "Network Error!",
         severity: "error",
-        detail: "Please check internet connection",
       },
     };
   }
@@ -43,9 +42,8 @@ export const httpErrorHandler = (error: any) => {
       message: data.message,
       notification: {
         show: true,
-        severity: "warn",
+        severity: "warning",
         summary: "Error Message",
-        detail: data.message,
       },
     };
   }
