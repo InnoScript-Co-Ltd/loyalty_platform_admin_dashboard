@@ -7,13 +7,12 @@ import {
   Grid2,
   Input,
   InputLabel,
-  TextField,
 } from "@mui/material";
 import { useState } from "react";
 import { countryPayload } from "../country.payload";
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, AppRootState } from "../../../stores";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../stores";
 import { COUNTRY_STORE, countryService } from "../country.service";
 import { payloadHandler } from "../../../helpers/handler";
 import { Breadcrumb } from "../../../components/Breadcrumb";
@@ -28,18 +27,15 @@ const CountryCreate = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  // const {  } = useSelector((state: AppRootState) => state.share);
 
   const submitCountryCreate = async () => {
     setLoading(true);
-    // const form : COUNTRY_STORE = formBuilder(payload, countryPayload.create);
     console.log(payload);
     const response = await countryService.store(payload, dispatch);
-    // if (response.data) {
-    //   navigate(`${paths.country}/${response.data.id}`);
-    // }
+    if (response.status === 201) {
+      navigate(`${paths.countryList}`);
+    }
     setLoading(false);
-    navigate("/country/list");
   };
 
   return (
