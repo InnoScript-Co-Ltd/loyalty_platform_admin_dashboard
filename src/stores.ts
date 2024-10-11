@@ -1,17 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit'
 import shareSlice, { SHARE_SLICE } from "./shares/shareSlice";
 import countrySlice, { COUNTRY_SLICE } from "../src/modules/country/country.slice"
+import stateSlice, { STATE_SLICE } from './modules/state/state.slice';
 
 interface RootState {
     share: SHARE_SLICE;
-    country: COUNTRY_SLICE
+    country: COUNTRY_SLICE;
+    state: STATE_SLICE;
     // other slices of state...
   }
 
 export const stores = configureStore({
   reducer: {
     share: shareSlice,
-    country: countrySlice
+    country: countrySlice,
+    state: stateSlice,
   },
 })
 
