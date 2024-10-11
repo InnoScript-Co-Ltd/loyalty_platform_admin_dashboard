@@ -1,7 +1,7 @@
 import { keys } from "../constants/config";
 import { updateError, updateNotification } from "../shares/shareSlice";
 import { removeData } from "./localStorage";
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
 
 /**
  * Payload handler for update state
@@ -10,7 +10,12 @@ import { Dispatch } from 'redux';
  * @param {*} field
  * @param {*} fn
  */
-export const payloadHandler = (payload : any, value: string | number, field: string, fn: (updatedPayload: any) => void) => {
+export const payloadHandler = (
+  payload: any,
+  value: string | number,
+  field: string,
+  fn: (updatedPayload: any) => void
+) => {
   let updatePayload = { ...payload };
   updatePayload[field] = value;
   fn(updatePayload);
@@ -28,24 +33,22 @@ export const httpErrorHandler = (error: any) => {
       status: 0,
       notification: {
         show: true,
-        summary: "Network Error!",
-        severity: "error",
-        detail: "Please check internet connection",
+        msg: "Network Error!",
+        variant: "error",
       },
     };
   }
 
   const { status, data } = error.response;
-
-  if (status === 400 || status === 404 || status === 500 || status === 403) {
+  
+  if (status === 400 || status === 404 || status === 500 || status === 403 || status === 405) {
     return {
       status: status,
-      message: data.message,
+      message: error.message,
       notification: {
         show: true,
-        severity: "warn",
-        summary: "Error Message",
-        detail: data.message,
+        variant: "warning",
+        msg: error.message,
       },
     };
   }
@@ -69,7 +72,7 @@ export const httpErrorHandler = (error: any) => {
  * @param {*} result
  * @returns
  */
-export const httpResponseHandler = (result : any) => {
+export const httpResponseHandler = (result: any) => {
   return {
     status: result.status,
     statusText: result.statusText,
@@ -84,8 +87,8 @@ export const httpResponseHandler = (result : any) => {
  * @returns
  */
 export const httpServiceHandler = async (
-    dispatch: Dispatch, 
-    result: { status: number, notification?: string, error?: string }
+  dispatch: Dispatch,
+  result: { status: number; notification?: string | any; error?: string }
 ) => {
   await dispatch(updateError(null));
   if (
@@ -93,9 +96,16 @@ export const httpServiceHandler = async (
     result.status === 0 ||
     result.status === 500 ||
     result.status === 404 ||
-    result.status === 403
+    result.status === 403 ||
+    result.status === 405
   ) {
-    await dispatch(updateNotification(result.notification));
+    
+    await dispatch(updateNotification({
+        msg: result.notification?.msg,
+        variant: "error",
+        show: true
+    }));
+    // await dispatch(updateNotification(result.notification));
   }
 
   if (result.status === 422) {

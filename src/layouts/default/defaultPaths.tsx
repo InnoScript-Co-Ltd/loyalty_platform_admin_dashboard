@@ -21,11 +21,11 @@ export const navigationList = [
         title: 'List',
         icon: <FormatListBulletedIcon />,
       },
-      {
-        segment: 'new',
-        title: 'Create',
-        icon: <AddCircleOutlineIcon />,
-      },
+      // {
+      //   segment: 'new',
+      //   title: 'Create',
+      //   icon: <AddCircleOutlineIcon />,
+      // },
     ],
   },
 ]

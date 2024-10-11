@@ -1,42 +1,87 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { COUNTRY_PAYLOAD, countryPayload } from "./country.payload";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { COUNTRY, COUNTRY_PAYLOAD, countryPayload } from "./country.payload";
 
-export interface COUNTRY_PAGINATE_PARAMS extends Pick<COUNTRY_PAYLOAD, 'paginateParams'> {}
 
+/**
+ * Interface representing the shape of the country slice in Redux.
+ */
 export interface COUNTRY_SLICE {
-    countries: Array<any>,
-    country: null | any,
-    paginateParams: COUNTRY_PAGINATE_PARAMS
+  data: {
+    countries: COUNTRY[];
+    paging: {
+      totalCount: number;
+      totalPages: number;
+      previousPage: null | string;
+      nextPage: number;
+      firstRowOnPage: number;
+      lastRowOnPage: number;
+    };
+  };
+  country: null | COUNTRY;
+  pagingParams: COUNTRY_PAYLOAD["pagingParams"];
 }
 
-
-
-const countrySlice = createSlice({
-    name: 'admin',
-    initialState: {
-        countries: [],
-        country: null,
-        paginateParams: countryPayload.paginateParams
+// Initial state for the country slice
+const initialState: COUNTRY_SLICE = {
+  data: {
+    countries: [],
+    paging: {
+      totalCount: 0,
+      totalPages: 0,
+      previousPage: null,
+      nextPage: 0,
+      firstRowOnPage: 0,
+      lastRowOnPage: 0,
     },
-    reducers: {
-        index: (state, action) => {
-            state.countries = action.payload;
-            return state;
-        },
-        update: (state, action) => {
-            state.country = action.payload;
-            return state;
-        },
-        show: (state, action) => {
-            state.country = action.payload;
-            return state;
-        },
-        setPaginate: (state, action) => {
-            state.paginateParams = action.payload;
-            return state;
-        }
-    }
+  },
+  country: null,
+  pagingParams: countryPayload.pagingParams, // Make sure this matches the structure
+};
+
+// Create a slice of the Redux store for country data
+const countrySlice = createSlice({
+  name: "country",
+  initialState,
+  reducers: {
+    /**
+     * Sets the country data in the state.
+     * @param state The current state.
+     * @param action The action containing the payload.
+     * @returns The updated state.
+     */
+    index: (state, action: PayloadAction<{ countries: COUNTRY[]; paging: any }>) => {
+      state.data = action.payload;
+    },
+    /**
+     * Updates the current country data in the state.
+     * @param state The current state.
+     * @param action The action containing the updated country data.
+     * @returns The updated state.
+     */
+    update: (state, action: PayloadAction<COUNTRY>) => {
+      state.country = action.payload;
+    },
+    /**
+     * Shows the details of a specific country.
+     * @param state The current state.
+     * @param action The action containing the country data to show.
+     * @returns The updated state.
+     */
+    show: (state, action: PayloadAction<COUNTRY>) => {
+      state.country = action.payload;
+    },
+    /**
+     * Sets the pagination parameters.
+     * @param state The current state.
+     * @param action The action containing the pagination parameters.
+     * @returns The updated state.
+     */
+    setPaginate: (state, action: PayloadAction<COUNTRY_PAYLOAD["pagingParams"]>) => {
+      state.pagingParams = action.payload; // Use the full type
+    },
+  },
 });
 
+// Export the actions and reducer
 export const { index, update, show, setPaginate } = countrySlice.actions;
 export default countrySlice.reducer;

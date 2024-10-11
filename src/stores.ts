@@ -11,7 +11,7 @@ interface RootState {
 export const stores = configureStore({
   reducer: {
     share: shareSlice,
-    country: countrySlice
+    country: countrySlice,
   },
 })
 
