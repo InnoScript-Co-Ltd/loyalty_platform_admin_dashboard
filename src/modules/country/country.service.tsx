@@ -15,28 +15,25 @@ export const countryService = {
         const response : any = await postRequest(endpoints.country, payload);
         await httpServiceHandler(dispatch, response);
 
-        if(response.status === 200) {
-            dispatch(updateNotification( {
-                show: true,
-                summary: "Success",
-                severity: "success",
-                detail: response.message
+        if(response.status === 201) {
+            dispatch(updateNotification({
+                msg: "Country is created successfully",
+                variant: "success",
+                show: true
             }));
         }
         return response;
     },
 
-    index: async (dispatch: Dispatch, params: any, fn : any) => {
+    index: async (dispatch: Dispatch, params: any) => {
         const response: any = await getRequest(endpoints.country, params);
         await httpServiceHandler(dispatch, response);
         if(response.status === 200) { 
-            fn('Success', { variant: "success" })
-                     
-            // dispatch(updateNotification({
-            //     msg: "Success",
-            //     variant: "success",
-            //     show: true
-            // }));
+            dispatch(updateNotification({
+                msg: "Country list is successfully retrived!",
+                variant: "info",
+                show: true
+            }));
             dispatch(index(response.data ? response.data : response.data));
         }
         return response;

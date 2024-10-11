@@ -218,7 +218,7 @@ const CountryUpdate = () => {
             marginTop: "20px",
           }}
         >
-          <Button variant="outlined">Cancle</Button>
+          <Button variant="outlined" onClick={() => navigate(paths.countryList)}>Cancle</Button>
           <Button variant="contained" onClick={submitCountryUpdate}>
             Submit
           </Button>
