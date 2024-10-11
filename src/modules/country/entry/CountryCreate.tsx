@@ -8,6 +8,7 @@ import { COUNTRY_STORE, countryService } from "../country.service";
 import { payloadHandler } from "../../../helpers/handler";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import ValidationMessage from "../../../components/ValidationMessage";
+import { paths } from "../../../constants/paths";
 
 const CountryCreate = () => {
   const [loading, setLoading] = useState(false);
@@ -127,7 +128,7 @@ const CountryCreate = () => {
             marginTop: "20px",
           }}
         >
-          <Button variant="outlined">Cancle</Button>
+          <Button variant="outlined" onClick={() => navigate(paths.countryList)} >Cancle</Button>
           <Button variant="contained" onClick={submitCountryCreate}>
             Submit
           </Button>

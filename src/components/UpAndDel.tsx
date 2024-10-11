@@ -12,7 +12,6 @@ const UpAndDel = ({ url, fn }: { url: string, fn: any }) => {
 
   const dele = async () => {
     const res: any = await delRequest(`${baseURL}${url}`);
-    console.log(res);
     
     if(res.status === 204){
       fn()
@@ -24,14 +23,14 @@ const UpAndDel = ({ url, fn }: { url: string, fn: any }) => {
       sx={{
         display: "flex",
         justifyContent: "start",
-        alignItems: "center",
-        gap: 3,
+        alignItems: "start",
+        gap: .5,
       }}
     >
-      <Button onClick={() => navigate(url)}>
+      <Button size="small" onClick={() => navigate(url)}>
         <EditIcon />
       </Button>
-      <Button color="error" onClick={dele}>
+      <Button size="small" color="error" onClick={dele}>
         <DeleteIcon />
       </Button>
     </Box>

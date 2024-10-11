@@ -7,13 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import {
-  columns,
-  Country_Column,
-  countryPayload,
-  StyledTableCell,
-  StyledTableRow,
-} from "../country.payload";
+import { columns, countryPayload } from "../country.payload";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppRootState } from "../../../stores";
 import { countryService } from "../country.service";
@@ -33,7 +27,10 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { useNavigate } from "react-router";
 import UpAndDel from "../../../components/UpAndDel";
-import { useSnackbar } from "notistack";
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../../../components/TableCommon";
 
 const CountryTableView = () => {
   const [page, setPage] = React.useState(0);
@@ -42,8 +39,6 @@ const CountryTableView = () => {
   const { data, pagingParams } = useSelector(
     (state: AppRootState) => state.country
   );
-
-  const { enqueueSnackbar } = useSnackbar();
 
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
@@ -62,19 +57,25 @@ const CountryTableView = () => {
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    dispatch(
+      setPaginate({
+        ...pagingParams,
+        PageSize: event.target.value,
+      })
+    );
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   const loadingData = React.useCallback(async () => {
     setLoading(true);
-    await countryService.index(dispatch, pagingParams, enqueueSnackbar);
+    await countryService.index(dispatch, pagingParams);
     setLoading(false);
   }, [dispatch, pagingParams]);
 
   React.useEffect(() => {
     loadingData();
-  }, [loadingData]);
+  }, [pagingParams]);
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -140,35 +141,34 @@ const CountryTableView = () => {
               {columns.map((column) => (
                 <StyledTableCell
                   key={column.id}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    maxWidth: column.maxWidth,
+                  }}
                   align={column.numeric ? "right" : "left"}
                   padding={column.disablePadding ? "none" : "normal"}
-                  sortDirection={pagingParams.SortDir === column.id ? pagingParams.SortField : false}
+                  sortDirection={pagingParams.SortDir}
                 >
                   <TableSortLabel
-                    active={pagingParams.SortDir === column.id}
+                    active={pagingParams.SortField === column.id}
                     direction={pagingParams.SortDir === 0 ? "asc" : "desc"}
-                    onClick={(e) => {
-                      dispatch(setPaginate({
-                        ...pagingParams,
-                        SortField: column.id,
-                        SortDir: pagingParams.SortDir === 0 ? 1 : 0
-                      }))
+                    onClick={() => {
+                      dispatch(
+                        setPaginate({
+                          ...pagingParams,
+                          SortField: column.id,
+                          SortDir: pagingParams.SortDir === 0 ? 1 : 0,
+                        })
+                      );
                     }}
                   >
                     {column.label}
-                    {pagingParams.SortDir === column.id ? (
-                      <Box component="span">
-                        {pagingParams.SortDir === "desc"
-                          ? "sorted descending"
-                          : "sorted ascending"}
-                      </Box>
-                    ) : null}
                   </TableSortLabel>
                 </StyledTableCell>
               ))}
             </TableRow>
           </TableHead>
+
           <TableBody>
             {data.countries.map((row: any) => {
               return (
@@ -199,7 +199,12 @@ const CountryTableView = () => {
                             case "FlagIcon":
                               return value; // Render the flag icon as-is
                             case "Action":
-                              return <UpAndDel url={`${paths.country}/${row.id}`} fn={loadingData} />
+                              return (
+                                <UpAndDel
+                                  url={`${paths.country}/${row.id}`}
+                                  fn={loadingData}
+                                />
+                              );
                             default:
                               return value; // Fallback case
                           }
