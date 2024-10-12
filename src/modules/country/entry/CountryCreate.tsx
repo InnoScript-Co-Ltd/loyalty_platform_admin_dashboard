@@ -7,13 +7,12 @@ import {
   Grid2,
   Input,
   InputLabel,
-  TextField,
 } from "@mui/material";
 import { useState } from "react";
 import { countryPayload } from "../country.payload";
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, AppRootState } from "../../../stores";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../stores";
 import { COUNTRY_STORE, countryService } from "../country.service";
 import { payloadHandler } from "../../../helpers/handler";
 import { Breadcrumb } from "../../../components/Breadcrumb";
@@ -28,18 +27,15 @@ const CountryCreate = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  // const {  } = useSelector((state: AppRootState) => state.share);
 
   const submitCountryCreate = async () => {
     setLoading(true);
-    // const form : COUNTRY_STORE = formBuilder(payload, countryPayload.create);
     console.log(payload);
     const response = await countryService.store(payload, dispatch);
-    // if (response.data) {
-    //   navigate(`${paths.country}/${response.data.id}`);
-    // }
+    if (response.status === 201) {
+      navigate(`${paths.countryList}`);
+    }
     setLoading(false);
-    navigate("/country/list");
   };
 
   return (
@@ -50,24 +46,6 @@ const CountryCreate = () => {
         <h2>Country Create</h2>
         <Grid2 container spacing={2}>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            {/* <TextField
-              id="outlined-basic"
-              label="Country Name"
-              fullWidth
-              variant="filled"
-              placeholder="Enter region name"
-              disabled={loading}
-              onChange={(e) =>
-                payloadHandler(
-                  payload,
-                  e.target.value,
-                  "Name",
-                  (updateValue) => {
-                    setPayload(updateValue);
-                  }
-                )
-              }
-            /> */}
             <FormControl variant="filled" fullWidth>
               <InputLabel htmlFor="country_name">Country Name</InputLabel>
               <Input
@@ -91,23 +69,6 @@ const CountryCreate = () => {
             </FormControl>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            {/* <TextField
-              id="outlined-basic"
-              label="Zip Code"
-              fullWidth
-              variant="filled"
-              disabled={loading}
-              onChange={(e) =>
-                payloadHandler(
-                  payload,
-                  e.target.value,
-                  "ZipCode",
-                  (updateValue) => {
-                    setPayload(updateValue);
-                  }
-                )
-              }
-            /> */}
             <FormControl variant="filled" fullWidth>
               <InputLabel htmlFor="zip_code">Zip Code</InputLabel>
               <Input
@@ -129,23 +90,6 @@ const CountryCreate = () => {
             </FormControl>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            {/* <TextField
-              id="outlined-basic"
-              label="Mobile Prefix Number"
-              fullWidth
-              variant="filled"
-              disabled={loading}
-              onChange={(e) =>
-                payloadHandler(
-                  payload,
-                  e.target.value,
-                  "MobilePrefixNumber",
-                  (updateValue) => {
-                    setPayload(updateValue);
-                  }
-                )
-              }
-            /> */}
             <FormControl variant="filled" fullWidth>
               <InputLabel htmlFor="mobile_prefix">
                 Mobile Prefix Number
@@ -171,23 +115,6 @@ const CountryCreate = () => {
             </FormControl>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            {/* <TextField
-              id="outlined-basic"
-              label="FlagIcon"
-              fullWidth
-              variant="filled"
-              disabled={loading}
-              onChange={(e) =>
-                payloadHandler(
-                  payload,
-                  e.target.value,
-                  "FlagIcon",
-                  (updateValue) => {
-                    setPayload(updateValue);
-                  }
-                )
-              }
-            /> */}
             <FormControl variant="filled" fullWidth>
               <InputLabel htmlFor="flag_icon">Flag Icon</InputLabel>
               <Input

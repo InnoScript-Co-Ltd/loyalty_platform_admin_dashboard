@@ -12,7 +12,6 @@ const UpAndDel = ({ url, fn }: { url: string, fn: any }) => {
 
   const dele = async () => {
     const res: any = await delRequest(`${baseURL}${url}`);
-    
     if(res.status === 204){
       fn()
     }
