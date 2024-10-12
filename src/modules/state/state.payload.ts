@@ -20,15 +20,13 @@ export interface STATE_PAYLOAD {
     name: string,
     zipCode?: string,
     profile?: string,
-    countryId: number,
-    countryName: string,
+    countryId: string | undefined,
   },
   update: {
     name: string,
     zipCode?: string,
     profile?: string,
-    countryId: number,
-    countryName: string,
+    countryId: string | undefined,
   },
   pagingParams: {
     PageSize: number,
@@ -48,41 +46,19 @@ export const stateColumns: readonly Column[] = [
   { id: "countryName", label: "Country Name", minWidth: 150, numeric: false, disablePadding: false, },
 ];
 
-// Styled table cell and row (reuse from country table)
-export const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-export const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
-
 // State payload example
 export const statePayload: STATE_PAYLOAD = {
   create: {
     name: "",
     zipCode: "",
     profile: "",
-    countryId: 0, 
-    countryName: "",
+    countryId: "", 
   },
   update: {
     name: "",
     zipCode: "",
     profile: "",
-    countryId: 0,
-    countryName: "",
+    countryId: "",
   },
   pagingParams: {
     PageSize: paginateOptions.rows,

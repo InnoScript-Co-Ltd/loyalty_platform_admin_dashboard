@@ -15,7 +15,7 @@ export const stores = configureStore({
   reducer: {
     share: shareSlice,
     country: countrySlice,
-    city:citySlice
+    city:citySlice,
     state: stateSlice,
   },
 })

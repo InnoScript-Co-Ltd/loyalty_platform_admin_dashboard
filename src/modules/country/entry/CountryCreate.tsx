@@ -46,24 +46,6 @@ const CountryCreate = () => {
         <h2>Country Create</h2>
         <Grid2 container spacing={2}>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            {/* <TextField
-              id="outlined-basic"
-              label="Country Name"
-              fullWidth
-              variant="filled"
-              placeholder="Enter region name"
-              disabled={loading}
-              onChange={(e) =>
-                payloadHandler(
-                  payload,
-                  e.target.value,
-                  "Name",
-                  (updateValue) => {
-                    setPayload(updateValue);
-                  }
-                )
-              }
-            /> */}
             <FormControl variant="filled" fullWidth>
               <InputLabel htmlFor="country_name">Country Name</InputLabel>
               <Input
@@ -87,23 +69,6 @@ const CountryCreate = () => {
             </FormControl>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            {/* <TextField
-              id="outlined-basic"
-              label="Zip Code"
-              fullWidth
-              variant="filled"
-              disabled={loading}
-              onChange={(e) =>
-                payloadHandler(
-                  payload,
-                  e.target.value,
-                  "ZipCode",
-                  (updateValue) => {
-                    setPayload(updateValue);
-                  }
-                )
-              }
-            /> */}
             <FormControl variant="filled" fullWidth>
               <InputLabel htmlFor="zip_code">Zip Code</InputLabel>
               <Input
@@ -125,23 +90,6 @@ const CountryCreate = () => {
             </FormControl>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            {/* <TextField
-              id="outlined-basic"
-              label="Mobile Prefix Number"
-              fullWidth
-              variant="filled"
-              disabled={loading}
-              onChange={(e) =>
-                payloadHandler(
-                  payload,
-                  e.target.value,
-                  "MobilePrefixNumber",
-                  (updateValue) => {
-                    setPayload(updateValue);
-                  }
-                )
-              }
-            /> */}
             <FormControl variant="filled" fullWidth>
               <InputLabel htmlFor="mobile_prefix">
                 Mobile Prefix Number
@@ -167,23 +115,6 @@ const CountryCreate = () => {
             </FormControl>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 3 }}>
-            {/* <TextField
-              id="outlined-basic"
-              label="FlagIcon"
-              fullWidth
-              variant="filled"
-              disabled={loading}
-              onChange={(e) =>
-                payloadHandler(
-                  payload,
-                  e.target.value,
-                  "FlagIcon",
-                  (updateValue) => {
-                    setPayload(updateValue);
-                  }
-                )
-              }
-            /> */}
             <FormControl variant="filled" fullWidth>
               <InputLabel htmlFor="flag_icon">Flag Icon</InputLabel>
               <Input
