@@ -13,4 +13,9 @@ export const paths = {
     countryCreate: "/country/new",
     countryDetail: "/country/:id",
 
+    state: "/state",
+    stateList: "/state/list",
+    stateCreate: "/state/new",
+    stateDetail: "/state/:id",
+
 }
