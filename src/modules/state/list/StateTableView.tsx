@@ -122,8 +122,7 @@ const StateTableView = () => {
         >
           <Button
             startIcon={<AddCircleOutlineIcon />}
-            // onClick={() => navigate(paths.stateCreate)} 
-            onClick={() => navigate(`${paths.state}/4`)}
+            onClick={() => navigate(paths.stateCreate)}
           >
             Create
           </Button>
