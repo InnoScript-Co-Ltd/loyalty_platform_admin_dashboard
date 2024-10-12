@@ -1,13 +1,16 @@
 import http from "../constants/axios"
 import { httpErrorHandler, httpResponseHandler } from "./handler"
 
-const urlParams = (params: string) => {
+const urlParams = (params: { [key: string]: any }) => {
     let paramsArray: Array<string> = [];
-    Object.keys(params).map((value : any) => {
-        return paramsArray.push(`${value}=${params[value]}`);
+    Object.keys(params).forEach((key) => {
+        if (params[key] !== "" && params[key] !== null) {
+            paramsArray.push(`${key}=${params[key]}`);
+        }
     });
     return paramsArray.join("&");
-}
+};
+
 
 /**
  * Http get method request

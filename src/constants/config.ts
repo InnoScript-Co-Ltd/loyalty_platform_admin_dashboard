@@ -1,3 +1,4 @@
+import { VariantType } from "notistack";
 
 export const env = [
     'http://localhost:5205/api/v1',
@@ -14,13 +15,18 @@ export const keys = {
     LANGUAGE: "LANGUAGE"
 }
 
-export const notificationOptions = {
-    severity: "info",
-    sticky: false,
-    life: 2000,
-    closable: true,
-    icon: "pi pi-info-circle",
+export interface NotificationOptions {
+    variant: VariantType, // "success" | "error" | "warning" | "default" | "info"
+    msg: string,
+    show: false,
 }
+
+export const notificationOptions: NotificationOptions = {
+    variant: "info",
+    msg: "",
+    show: false
+}
+
 
 interface Paginate_Options {
     rows: number,
