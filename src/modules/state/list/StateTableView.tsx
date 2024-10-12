@@ -9,8 +9,6 @@ import TableRow from "@mui/material/TableRow";
 import {
   stateColumns,
   statePayload,
-  StyledTableCell,
-  StyledTableRow,
 } from "../state.payload"; 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppRootState } from "../../../stores";
@@ -32,6 +30,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { useNavigate } from "react-router";
 import UpAndDel from "../../../components/UpAndDel";
 import { useSnackbar } from "notistack";
+import { StyledTableCell, StyledTableRow } from "../../../components/TableCommon";
 
 const StateTableView = () => {
   const [page, setPage] = React.useState(0);
@@ -72,13 +71,16 @@ const StateTableView = () => {
 
   const loadingData = React.useCallback(async () => {
     setLoading(true);
-    await stateService.index(dispatch, pagingParams, enqueueSnackbar);
+    // await stateService.index(dispatch, pagingParams);
     setLoading(false);
   }, [dispatch, pagingParams]);
 
   React.useEffect(() => {
     loadingData();
   }, [loadingData]);
+
+  console.log(data);
+  
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -120,7 +122,7 @@ const StateTableView = () => {
         >
           <Button
             startIcon={<AddCircleOutlineIcon />}
-            onClick={() => navigate(paths.stateCreate)} 
+            onClick={() => navigate(paths.stateCreate)}
           >
             Create
           </Button>

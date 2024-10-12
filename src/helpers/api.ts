@@ -1,4 +1,5 @@
 import http from "../constants/axios"
+import { HTTPErrorResponse, HTTPResponse } from "../constants/config";
 import { httpErrorHandler, httpResponseHandler } from "./handler"
 
 const urlParams = (params: { [key: string]: any }) => {
@@ -18,7 +19,7 @@ const urlParams = (params: { [key: string]: any }) => {
  * @param {*} params 
  * @returns 
  */
-export const getRequest = async (path: string, params : any | null) => {
+export const getRequest = async (path: string, params : any | null): Promise<HTTPResponse | HTTPErrorResponse | undefined>  => {
     try {
         const url = params ? `${path}?${urlParams(params)}` : path;
         const result = await http.get(url);

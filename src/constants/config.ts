@@ -27,6 +27,23 @@ export const notificationOptions: NotificationOptions = {
     show: false
 }
 
+export interface HTTPResponse {
+    status: number,
+    statusText: string,
+    data: any,
+}
+
+export interface HTTPErrorResponse {
+    message: string,
+    status: number,
+    notification?: {
+        show: boolean,
+        msg: string,
+        variant: string,
+    },
+    error?: any | null
+}
+
 
 interface Paginate_Options {
     rows: number,

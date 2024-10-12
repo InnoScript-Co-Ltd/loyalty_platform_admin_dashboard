@@ -27,11 +27,17 @@ export const stateService = {
         return response;
     },
 
-    index: async (dispatch: Dispatch, params: any, fn : any) => {
-        const response: any = await getRequest(endpoints.country, params);
+    index: async (dispatch: Dispatch, params: any) => {
+        const response: any = await getRequest(endpoints.state, params);
+        console.log(response);
+        
         await httpServiceHandler(dispatch, response);
         if(response.status === 200) { 
-            fn('Success', { variant: "success" })
+            dispatch(updateNotification({
+                msg: "Country list is successfully retrived!",
+                variant: "info",
+                show: true
+            }));
             dispatch(index(response.data ? response.data : response.data));
         }
         return response;
