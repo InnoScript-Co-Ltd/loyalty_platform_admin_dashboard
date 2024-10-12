@@ -71,7 +71,7 @@ const StateTableView = () => {
 
   const loadingData = React.useCallback(async () => {
     setLoading(true);
-    // await stateService.index(dispatch, pagingParams);
+    await stateService.index(dispatch, pagingParams);
     setLoading(false);
   }, [dispatch, pagingParams]);
 
@@ -155,23 +155,18 @@ const StateTableView = () => {
                 >
                   <TableSortLabel
                     active={pagingParams.SortDir === column.id}
-                    direction={pagingParams.SortDir === "asc" ? "asc" : "desc"}
+                    direction={pagingParams.SortDir === 0 ? "asc" : "desc"}
                     onClick={() => {
-                      dispatch(setPaginate({
-                        ...pagingParams,
-                        SortField: column.id,
-                        SortDir: pagingParams.SortDir === "asc" ? "desc" : "asc",
-                      }));
+                      dispatch(
+                        setPaginate({
+                          ...pagingParams,
+                          SortField: column.id,
+                          SortDir: pagingParams.SortDir === 0 ? 1 : 0,
+                        })
+                      );
                     }}
                   >
                     {column.label}
-                    {pagingParams.SortDir === column.id ? (
-                      <Box component="span">
-                        {pagingParams.SortDir === "desc"
-                          ? "sorted descending"
-                          : "sorted ascending"}
-                      </Box>
-                    ) : null}
                   </TableSortLabel>
                 </StyledTableCell>
               ))}
