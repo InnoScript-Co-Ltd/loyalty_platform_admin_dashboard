@@ -5,7 +5,7 @@ import { paginateOptions } from "../../constants/config";
 
 // Define columns for state table
 interface Column {
-  id: "id" | "name" | "zipCode" | "profile" | "countryId" | "countryName";
+  id: "id" | "name" | "zipCode" | "profile" | "countryId" | "countryName" | "action";
   label: string;
   minWidth?: number;
   align?: "right";
@@ -42,8 +42,8 @@ export const stateColumns: readonly Column[] = [
   { id: "name", label: "State Name", minWidth: 170 , numeric: false, disablePadding: false, },
   { id: "zipCode", label: "Zip Code", minWidth: 150, numeric: false, disablePadding: false, },
   { id: "profile", label: "Profile", minWidth: 150, numeric: false, disablePadding: false, },
-  { id: "countryId", label: "Country ID", minWidth: 150, numeric: false, disablePadding: false, },
   { id: "countryName", label: "Country Name", minWidth: 150, numeric: false, disablePadding: false, },
+  { id: "action", label: "Action", minWidth: 50, numeric: false, disablePadding: false }
 ];
 
 // State payload example

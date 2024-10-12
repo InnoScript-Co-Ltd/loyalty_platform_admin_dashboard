@@ -60,6 +60,7 @@ const CountryTableView = () => {
     dispatch(
       setPaginate({
         ...pagingParams,
+        CurrentPage: 1,
         PageSize: event.target.value,
       })
     );
@@ -141,19 +142,16 @@ const CountryTableView = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+            {columns.map((column) => (
                 <StyledTableCell
                   key={column.id}
-                  style={{
-                    minWidth: column.minWidth,
-                    maxWidth: column.maxWidth,
-                  }}
+                  style={{ minWidth: column.minWidth }}
                   align={column.numeric ? "right" : "left"}
                   padding={column.disablePadding ? "none" : "normal"}
-                  sortDirection={pagingParams.SortDir}
+                  sortDirection={pagingParams.SortDir === column.id ? pagingParams.SortField : false}
                 >
                   <TableSortLabel
-                    active={pagingParams.SortField === column.id}
+                    active={pagingParams.SortDir === column.id}
                     direction={pagingParams.SortDir === 0 ? "asc" : "desc"}
                     onClick={() => {
                       dispatch(

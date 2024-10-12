@@ -76,21 +76,12 @@ function Main({ pathname }: { pathname: string }) {
   );
 }
 
-interface DemoProps {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * Remove this when copying and pasting into your project.
-   */
-  window?: () => Window;
-}
-
 const BRANDING = {
   title: "Loyalty Platfrom",
   logo: <img src="/logo.png" alt="Logo" />,
 };
 
-export default function BrandLayout(props: DemoProps) {
-  const { window } = props;
+export default function BrandLayout() {
 
   const [pathname, setPathname] = React.useState("/");
   const navigate = useNavigate();
@@ -103,9 +94,6 @@ export default function BrandLayout(props: DemoProps) {
     };
   }, [pathname]);
 
-  // Remove this const when copying and pasting into your project.
-  const demoWindow = window !== undefined ? window() : undefined;
-
   React.useEffect(() => {
     navigate(pathname);
   }, [pathname]);
@@ -116,7 +104,6 @@ export default function BrandLayout(props: DemoProps) {
       navigation={navigationList}
       router={router}
       theme={demoTheme}
-      window={demoWindow}
       branding={BRANDING}
     >
       <DashboardLayout>
