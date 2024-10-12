@@ -7,6 +7,7 @@ export const endpoints = {
     login: "auth/login",
     country: "Country",
     city: "City",
+    state:"State",
     image: `${baseURL}/storage/images`,
     status: "status",
 }

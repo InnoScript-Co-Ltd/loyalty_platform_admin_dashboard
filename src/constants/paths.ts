@@ -17,4 +17,10 @@ export const paths = {
     cityList: "/city/list",
     cityCreate: "/city/new",
     cityDetail: "/city/:id",
+  
+    state: "/state",
+    stateList: "/state/list",
+    stateCreate: "/state/new",
+    stateDetail: "/state/:id",
+
 }

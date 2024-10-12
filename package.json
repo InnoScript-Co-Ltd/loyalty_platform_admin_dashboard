@@ -53,5 +53,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/redux": "^3.6.31",
+    "typedoc": "^0.26.8",
+    "typedoc-plugin-markdown": "^4.2.9"
   }
 }

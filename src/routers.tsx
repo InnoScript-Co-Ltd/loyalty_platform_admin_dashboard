@@ -4,6 +4,8 @@ import { NotFound } from "./layouts/default/pages/NotFound";
 import BlankTemplate from "./layouts/default/pages/BlankTemplate";
 import { CountryRoute } from "./modules/country/country.route";
 import { CityRoute } from "./modules/city/city.route";
+import { StateRoute } from "./modules/state/state.route";
+import { DashboardRoute } from "./modules/dashboard/dashboard.route";
 
 
 export const routers = createBrowserRouter([
@@ -12,8 +14,10 @@ export const routers = createBrowserRouter([
         element: <DefaultLayout />,
         errorElement: <NotFound />,
         children: [
+            ...DashboardRoute,
             ...CountryRoute,
             ...CityRoute,
+            ...StateRoute,
         ]
     },
     {

@@ -4,6 +4,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
+import PublicIcon from '@mui/icons-material/Public';
 
 export const navigationList = [
   {
@@ -21,10 +22,22 @@ export const navigationList = [
         title: 'List',
         icon: <FormatListBulletedIcon />,
       },
+      // {
+      //   segment: 'new',
+      //   title: 'Create',
+      //   icon: <AddCircleOutlineIcon />,
+      // },
+    ],
+  },
+  {
+    segment: 'state',
+    title: 'State',
+    icon: <PublicIcon  />,
+    children: [
       {
-        segment: 'new',
-        title: 'Create',
-        icon: <AddCircleOutlineIcon />,
+        segment: 'list',
+        title: 'List',
+        icon: <FormatListBulletedIcon />,
       },
     ],
   },
