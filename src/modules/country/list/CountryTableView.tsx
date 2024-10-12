@@ -76,10 +76,9 @@ const CountryTableView = () => {
 
   React.useEffect(() => {
     loadingData();
-  }, [pagingParams]);
+  }, [pagingParams, loadingData]);
 
   console.log(data);
-  
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -142,13 +141,17 @@ const CountryTableView = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-            {columns.map((column) => (
+              {columns.map((column) => (
                 <StyledTableCell
                   key={column.id}
                   style={{ minWidth: column.minWidth }}
                   align={column.numeric ? "right" : "left"}
                   padding={column.disablePadding ? "none" : "normal"}
-                  sortDirection={pagingParams.SortDir === column.id ? pagingParams.SortField : false}
+                  sortDirection={
+                    pagingParams.SortDir === column.id
+                      ? pagingParams.SortField
+                      : false
+                  }
                 >
                   <TableSortLabel
                     active={pagingParams.SortDir === column.id}

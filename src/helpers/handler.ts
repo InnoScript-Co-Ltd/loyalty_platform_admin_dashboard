@@ -10,15 +10,28 @@ import { Dispatch } from "redux";
  * @param {*} field
  * @param {*} fn
  */
+// export const payloadHandler = (
+//   payload: any,
+//   value: string | number,
+//   field: string,
+//   fn: (updatedPayload: any) => void
+// ) => {
+//   let updatePayload = { ...payload };
+//   updatePayload[field] = value;
+//   fn(updatePayload);
+// };
+
 export const payloadHandler = (
   payload: any,
   value: string | number,
   field: string,
   fn: (updatedPayload: any) => void
 ) => {
-  let updatePayload = { ...payload };
-  updatePayload[field] = value;
-  fn(updatePayload);
+  const updatedPayload = {
+    ...payload,
+    [field]: value,
+  };
+  fn(updatedPayload);
 };
 
 /**
@@ -42,7 +55,7 @@ export const payloadHandler = (
 //   }
 
 //   const { status, data } = error.response;
-  
+
 //   if (status === 400 || status === 404 || status === 500 || status === 403 || status === 405) {
 //     return {
 //       status: status,
@@ -76,7 +89,7 @@ export const payloadHandler = (
 export const httpErrorHandler = (error: any): HTTPErrorResponse => {
   if (error.code === "ERR_NETWORK") {
     return {
-      message: "Network Error!",  // Ensure message is set
+      message: "Network Error!", // Ensure message is set
       status: 0,
       notification: {
         show: true,
@@ -91,7 +104,7 @@ export const httpErrorHandler = (error: any): HTTPErrorResponse => {
   if ([400, 404, 500, 403, 405].includes(status)) {
     return {
       status: status,
-      message: error.message || "An error occurred",  // Ensure message is set
+      message: error.message || "An error occurred", // Ensure message is set
       notification: {
         show: true,
         variant: "warning",
@@ -103,7 +116,7 @@ export const httpErrorHandler = (error: any): HTTPErrorResponse => {
   if (status === 422) {
     return {
       status: status,
-      message: "Validation error",  // Add message for 422 status
+      message: "Validation error", // Add message for 422 status
       error: data.data,
     };
   }
@@ -113,14 +126,14 @@ export const httpErrorHandler = (error: any): HTTPErrorResponse => {
     window.location.reload();
     return {
       status: status,
-      message: "Unauthorized access",  // Add message for 401 status
+      message: "Unauthorized access", // Add message for 401 status
       error: data.message,
     };
   }
 
   return {
     status: status,
-    message: "Unknown error",  // Fallback for unknown cases
+    message: "Unknown error", // Fallback for unknown cases
     notification: {
       show: true,
       msg: "An unexpected error occurred.",
@@ -129,18 +142,13 @@ export const httpErrorHandler = (error: any): HTTPErrorResponse => {
   };
 };
 
-
-
-
-
 /**
  * Http response handler for api call
  * @param {*} result
  * @returns
  */
 export const httpResponseHandler = (result: any) => {
-
-  const response : HTTPResponse = {
+  const response: HTTPResponse = {
     status: result.status,
     statusText: result.statusText,
     data: result.data,
@@ -168,12 +176,13 @@ export const httpServiceHandler = async (
     result.status === 403 ||
     result.status === 405
   ) {
-    
-    await dispatch(updateNotification({
+    await dispatch(
+      updateNotification({
         msg: result.notification?.msg,
         variant: "error",
-        show: true
-    }));
+        show: true,
+      })
+    );
     // await dispatch(updateNotification(result.notification));
   }
 

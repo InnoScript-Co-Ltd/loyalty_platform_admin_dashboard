@@ -28,6 +28,17 @@ const CountryCreate = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
+  // const handleFieldChange =
+  //   (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  //     payloadHandler(payload, e.target.value, field, setPayload);
+  //   };
+
+  const handleFieldChange =
+    (payload: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const field = e.target.name;
+      payloadHandler(payload, e.target.value, field, setPayload);
+    };
+
   const submitCountryCreate = async () => {
     setLoading(true);
     console.log(payload);
@@ -50,18 +61,11 @@ const CountryCreate = () => {
               <InputLabel htmlFor="country_name">Country Name</InputLabel>
               <Input
                 id="country_name"
+                name="Name"
                 aria-describedby="country_name_text"
                 disabled={loading}
-                onChange={(e) =>
-                  payloadHandler(
-                    payload,
-                    e.target.value,
-                    "Name",
-                    (updateValue) => {
-                      setPayload(updateValue);
-                    }
-                  )
-                }
+                // onChange={handleFieldChange("Name")}
+                onChange={handleFieldChange(payload)}
               />
               <FormHelperText id="country_name_text">
                 Enter region name
@@ -73,18 +77,11 @@ const CountryCreate = () => {
               <InputLabel htmlFor="zip_code">Zip Code</InputLabel>
               <Input
                 id="zip_code"
+                name="ZipCode"
                 aria-describedby="zip_code_text"
                 disabled={loading}
-                onChange={(e) =>
-                  payloadHandler(
-                    payload,
-                    e.target.value,
-                    "ZipCode",
-                    (updateValue) => {
-                      setPayload(updateValue);
-                    }
-                  )
-                }
+                onChange={handleFieldChange(payload)}
+                // onChange={handleFieldChange("ZipCode")}
               />
               <FormHelperText id="zip_code_text">Enter zip code</FormHelperText>
             </FormControl>
@@ -96,18 +93,11 @@ const CountryCreate = () => {
               </InputLabel>
               <Input
                 id="mobile_prefix"
+                name="MobilePrefixNumber"
                 aria-describedby="mobile_prefix_text"
                 disabled={loading}
-                onChange={(e) =>
-                  payloadHandler(
-                    payload,
-                    e.target.value,
-                    "MobilePrefixNumber",
-                    (updateValue) => {
-                      setPayload(updateValue);
-                    }
-                  )
-                }
+                onChange={handleFieldChange(payload)}
+                // onChange={handleFieldChange("MobilePrefixNumber")}
               />
               <FormHelperText id="mobile_prefix_text">
                 Enter Mobile Prefix Number
@@ -119,18 +109,11 @@ const CountryCreate = () => {
               <InputLabel htmlFor="flag_icon">Flag Icon</InputLabel>
               <Input
                 id="flag_icon"
+                name="FlagIcon"
                 aria-describedby="flag_icon_text"
                 disabled={loading}
-                onChange={(e) =>
-                  payloadHandler(
-                    payload,
-                    e.target.value,
-                    "FlagIcon",
-                    (updateValue) => {
-                      setPayload(updateValue);
-                    }
-                  )
-                }
+                onChange={handleFieldChange(payload)}
+                // onChange={handleFieldChange("MobilePrefixNumber")}
               />
               <FormHelperText id="flag_icon_text">
                 Enter Flag Icon
@@ -149,7 +132,12 @@ const CountryCreate = () => {
             marginTop: "20px",
           }}
         >
-          <Button variant="outlined" onClick={() => navigate(paths.countryList)} >Cancle</Button>
+          <Button
+            variant="outlined"
+            onClick={() => navigate(paths.countryList)}
+          >
+            Cancle
+          </Button>
           <Button variant="contained" onClick={submitCountryCreate}>
             Submit
           </Button>
