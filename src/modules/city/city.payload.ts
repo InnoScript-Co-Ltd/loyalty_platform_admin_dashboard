@@ -5,7 +5,7 @@ import { paginateOptions } from "../../constants/config";
 
 // Define columns for city table
 interface Column {
-  id: "id" | "name" | "stateId" | "stateName" | "countryId" | "countryName" ;
+  id: "id" | "name" | "stateId" | "stateName" | "countryId" | "countryName" | "action";
   label: string;
   minWidth?: number;
   align?: "right";
@@ -18,17 +18,13 @@ interface Column {
 export interface CITY_PAYLOAD {
   create: {
     name: string,
-    stateId: number,
-    stateName: string,
-    countryId: number,
-    countryName: string,
+    stateId: string | undefined,
+    countryId: string | undefined,
   },
   update: {
     name: string,
-    stateId: number,
-    stateName: string,
-    countryId: number,
-    countryName: string,
+    stateId: string | undefined,
+    countryId: string | undefined,
   },
   pagingParams: {
     PageSize: number,
@@ -44,6 +40,7 @@ export const cityColumns: readonly Column[] = [
   { id: "name", label: "City Name", minWidth: 170, numeric: false, disablePadding: false, },
   { id: "stateName", label: "State Name", minWidth: 150, numeric: false, disablePadding: false, },
   { id: "countryName", label: "Country Name", minWidth: 150, numeric: false, disablePadding: false, },
+  { id: "action", label: "Action", minWidth: 50, numeric: false, disablePadding: false },
 ];
 
 // Styled table cell and row (reuse from country and state table)
@@ -70,17 +67,13 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export const cityPayload: CITY_PAYLOAD = {
   create: {
     name: "",
-    stateId: 0,
-    stateName: "",
-    countryId: 0,
-    countryName: "",
+    stateId: "",
+    countryId: "",
   },
   update: {
     name: "",
-    stateId: 0,
-    stateName: "",
-    countryId: 0,
-    countryName: "",
+    stateId: "",
+    countryId: "",
   },
   pagingParams: {
     PageSize: paginateOptions.rows,

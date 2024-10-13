@@ -107,7 +107,7 @@ const CityTableView = () => {
   // Fetch data
   const loadingData = React.useCallback(async () => {
     setLoading(true);
-    await cityService.index(dispatch, pagingParams, enqueueSnackbar);
+    await cityService.index(dispatch, pagingParams);
     setLoading(false);
   }, [dispatch, pagingParams]);
 

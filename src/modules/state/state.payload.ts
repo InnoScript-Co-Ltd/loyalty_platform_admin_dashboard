@@ -1,7 +1,17 @@
-import { styled } from "@mui/material/styles";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
 import { paginateOptions } from "../../constants/config";
+
+/**
+ * Interface representing the shape of a country object.
+ */
+export interface STATE {
+  id: string;
+  name: string;
+  zipCode: string;
+  profile: string;
+  countryId: string;
+  countryName: string;
+  // Add other country properties as necessary
+}
 
 // Define columns for state table
 interface Column {

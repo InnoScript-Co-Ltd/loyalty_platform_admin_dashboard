@@ -28,11 +28,12 @@ export const cityService = {
     },
 
     // Method to fetch the list of cities
-    index: async (dispatch: Dispatch, params: any, fn : any) => {
-        const response: any = await getRequest(endpoints.city, params); // Change endpoint to city
+    index: async (dispatch: Dispatch, params: any) => {
+        const response: any = await getRequest(endpoints.city, params);
+        console.log(response);
+        
         await httpServiceHandler(dispatch, response);
-
-        if (response.status === 200) {            
+        if(response.status === 200) {           
             dispatch(index(response.data ? response.data : response.data)); // Ensure you handle the response correctly
         }
         console.log(response.data);
