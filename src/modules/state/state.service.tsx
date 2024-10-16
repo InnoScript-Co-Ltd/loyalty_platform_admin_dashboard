@@ -18,10 +18,9 @@ export const stateService = {
 
         if (response.status === 200) {
             dispatch(updateNotification({
-                show: true,
-                summary: "Success",
-                severity: "success",
-                detail: response.message,
+                msg: "State is created successfully",
+                variant: "success",
+                show: true
             }));
         }
         return response;
@@ -34,7 +33,7 @@ export const stateService = {
         await httpServiceHandler(dispatch, response);
         if(response.status === 200) { 
             dispatch(updateNotification({
-                msg: "State list is successfully retrived!",
+                msg: "State list is successfully retrieved!",
                 variant: "info",
                 show: true
             }));

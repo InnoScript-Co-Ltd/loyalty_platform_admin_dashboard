@@ -33,7 +33,12 @@ export const cityService = {
         console.log(response);
         
         await httpServiceHandler(dispatch, response);
-        if(response.status === 200) {           
+        if(response.status === 200) {   
+            dispatch(updateNotification({
+                msg: "City list is successfully retrieved!",
+                variant: "info",
+                show: true
+            }));        
             dispatch(index(response.data ? response.data : response.data)); // Ensure you handle the response correctly
         }
         console.log(response.data);

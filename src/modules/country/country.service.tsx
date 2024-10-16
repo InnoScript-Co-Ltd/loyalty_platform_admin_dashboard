@@ -30,7 +30,7 @@ export const countryService = {
         await httpServiceHandler(dispatch, response);
         if(response.status === 200) { 
             dispatch(updateNotification({
-                msg: "Country list is successfully retrived!",
+                msg: "Country list is successfully retrieved!",
                 variant: "info",
                 show: true
             }));
